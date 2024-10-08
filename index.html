@@ -10,7 +10,8 @@
             background: #f0f0f0;
             display: grid;
             place-content: center;
-            height: 100dvh;
+            height: 100vh; /* Cambiado de 100dvh a 100vh */
+            margin: 0; /* Para eliminar el margen predeterminado del body */
         }
 
         main {
@@ -23,7 +24,6 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             padding: 8px;
             margin-bottom: 16px;
-
             overflow-y: auto;
         }
 
@@ -33,39 +33,68 @@
             gap: 4px;
             margin: 4px 0;
             padding: 4px 8px;
-            /* Esto es, el primer hijo de ul que sea span */
-            > p:first-child{
-                width: 36px;
-                height: 36px;
-                background: #eee;
-                font-size: 12px;
-                font-weight: 500;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                border-radius: 999999px;
-            }
-            > p:last-child{
-                border-radius: 4px;
-                padding: 4px 8px;                
-            }
-            
-            &.user{
-                align-self: flex-end;
-                align-items: flex-end;
-                span, p{
-                    background: rgb(219, 236, 255);
-                }
-            }
-            
-            &.bot{
-                align-self: flex-start;
-                span, p{
-                    background: rgb(198, 255, 220);
-                }
-            }
         }
 
+        /* Estilo para los mensajes */
+        .message {
+            display: flex;
+            align-items: flex-start; /* Alinear los elementos de los mensajes */
+        }
+
+        .message span {
+            width: 36px;
+            height: 36px;
+            background: #eee;
+            font-size: 12px;
+            font-weight: 500;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            margin-right: 8px; /* Espacio entre el span y el párrafo */
+        }
+
+        .message p {
+            border-radius: 4px;
+            padding: 4px 8px;
+            margin: 0; /* Para eliminar el margen predeterminado del párrafo */
+        }
+
+        .user p {
+            background: rgb(219, 236, 255);
+            align-self: flex-end;
+        }
+        
+        .bot p {
+            background: rgb(198, 255, 220);
+            align-self: flex-start;
+        }
+
+        form {
+            display: flex;
+            gap: 4px; /* Espacio entre el input y el botón */
+            margin-top: 8px; /* Espacio superior del formulario */
+        }
+
+        input {
+            flex: 1; /* Para que el input ocupe el espacio disponible */
+            padding: 8px; /* Espacio interno del input */
+            border: 1px solid #ccc; /* Borde del input */
+            border-radius: 4px; /* Esquinas redondeadas */
+        }
+
+        button {
+            padding: 8px 12px; /* Espacio interno del botón */
+            background-color: #007bff; /* Color de fondo del botón */
+            color: white; /* Color del texto del botón */
+            border: none; /* Sin borde */
+            border-radius: 4px; /* Esquinas redondeadas */
+            cursor: pointer; /* Cambia el cursor al pasar el ratón */
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Color de fondo al pasar el ratón */
+        }
     </style>
 </head>
 <body>
@@ -83,8 +112,8 @@
         </ul>
     </main>
     <form action="">
-        <input  placeholder="Escribe aquí tu mensaje">
-        <button>Enviar</button>
+        <input type="text" placeholder="Escribe aquí tu mensaje">
+        <button type="submit">Enviar</button>
     </form>
 
     <template id="message-template">
