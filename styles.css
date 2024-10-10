@@ -4,19 +4,21 @@ body {
     display: grid;
     place-content: center;
     height: 100vh; /* Cambiado de 100dvh a 100vh */
-    margin: 0; /* Para eliminar el margen predeterminado del body */
+    /*margin: 0; /* Para eliminar el margen predeterminado del body */
 }
 
 main {
     width: 400px;
     max-width: 100%;
     height: 70vh;
+
     background: #fff;
     border: 1px solid #ccc;    
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 8px;
     margin-bottom: 16px;
+
     overflow-y: auto;
     scroll-behavior: smooth;
 }
@@ -24,16 +26,11 @@ main {
 ul {
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    margin: 4px 0;
-    padding: 4px 8px;
+    list-style: none;
+    padding: 0;
 }
 
 /* Estilo para los mensajes */
-.message {
-    display: flex;
-    align-items: flex-start; /* Alinear los elementos de los mensajes */
-}
 
 .message {
     display: flex;
@@ -51,86 +48,112 @@ ul {
         justify-content: center;
         align-items: center;
         border-radius: 999999px;
-        margin-right: 8px; /* Espacio entre el span y el párrafo */
+        /*margin-right: 8px; /* Espacio entre el span y el párrafo */
     }
+
     p {
         border-radius: 4px;
         padding: 4px 8px;
-        margin: 0; /* Para eliminar el margen predeterminado del párrafo */
+        margin-top: 4px;
     }
-}
+    &.user{
+        align-self: flex-end;
+        align-items: flex-end;
 
-
-
-
-.user p {
-    background: rgb(219, 236, 255);
-    align-self: flex-end;
-    text-align: right;
-}
-.user span {
-    margin-left: auto;
-    margin-right: 0;
-}
-
-.bot p {
-    background: rgb(198, 255, 220);
-    align-self: flex-start;
-}
-
-form {
-    display: flex;
-    input {
-        border-radius: 999999px;
-        flex-grow: 1;
-        border: 0;
-        padding: 8px;
-        border: 1px solid #ccc
-    }
-    button{
-        background: #09f;
-        border: 0;
-        color: white;
-        border-radius: 6px;
-        cursor: pointer;
-        padding: 8px;
-        transition: background .3s ease;
-
-        &[disabled] {
-            background: #ccc;
-            opacity: .6;
-            pointer-events: none;
+        span,
+        p {
+            background: rgb(219, 236, 255);
         }
     }
 }
 
-input {
-    flex: 1; /* Para que el input ocupe el espacio disponible */
-    padding: 8px; /* Espacio interno del input */
-    border: 1px solid #ccc; /* Borde del input */
-    border-radius: 4px; /* Esquinas redondeadas */
-}
+    &.bot{
+        align-self: flex-start;
+        span,
+        p {
+            background: rgb(198, 255, 220);
+        }
+    }
 
-button {
-    padding: 8px 12px; /* Espacio interno del botón */
-    background-color: #007bff; /* Color de fondo del botón */
-    color: white; /* Color del texto del botón */
-    border: none; /* Sin borde */
-    border-radius: 4px; /* Esquinas redondeadas */
-    cursor: pointer; /* Cambia el cursor al pasar el ratón */
-}
+    form {
+        display: flex;
 
-button:hover {
-    background-color: #0056b3; /* Color de fondo al pasar el ratón */
-}
+        input{
+            border-radius: 999999px;
+            flex-grow: 1;
+            border: 0;
+            padding: 8px;
+            margin-right: 8px;
+            border: 1px solid #ccc
+        }
+        
+        button{
+            background: #09f;
+            border: 0;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+            padding: 8px;
+            transition: background .3s ease;
 
-small{
-    font-size: 10px;
-    color: #555;
-    position: fixed;
-    bottom: 10;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 400px;
-}
+            &[disabled]{
+                background: #ccc;
+                opacity: .6;
+                pointer-events: none;
+            }
+
+            &:hover{
+                background: rgb(0, 104, 173);
+            }
+        }
+    }
+
+    small {
+        font-size: 10px;
+        color: #555;
+        position: fixed;
+        bottom: 10px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 400px;
+    }
+
+    .loading {
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        height: 100%;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 50%;
+
+        i{
+            pointer-events: none;
+            width: 2.5em;
+            height: 2.5em;
+            border: 0.4em solid transparent;
+            border-color: #eee;
+            border-top-color: #3e67ec;
+            border-radius: 50%;
+            animation: loadingspin 1s linear infinite;
+        }
+
+        h4{
+            color: #444;
+            margin-bottom: 8px;
+        }
+
+        h5{
+            font-weight: 400;
+            margin: 0;
+            font-size: 10px;
+            opacity: .4;
+        }
+        
+        @keyframes loadingspin {
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    }
