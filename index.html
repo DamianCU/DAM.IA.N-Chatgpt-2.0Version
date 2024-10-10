@@ -7,7 +7,7 @@
     <title>DAM.IA.N ChatGPT 2.0 version</title>
     
     <script type="module">
-        import {CreateMLCEngine} from "https://esm.run/@mlc-ai/web-llm"
+        import {CreateWebWorkerMLCEngine} from "https://esm.run/@mlc-ai/web-llm"
 
         const $ = (el) => document.querySelector(el);
         
@@ -21,22 +21,11 @@
 
         let messages = [];
 
-        if(window.Worker){
-            const worker = new Worker('./worker.js');
-            worker.postMessage({name: 'Hello'})
-            worker.onmessage = (e) => {
-                console.log('worker: Messaq from main thread');
-                console.log(e)
-                if(e.data.name === 'hello back'){
-                    console.log('Worker: Sending message to main thread');
-                    worker.postMessage({name: 'hello back'});                    
-                }
-            }
-        }; 
 
         const SELECTED_MODEL = 'gemma-2b-it-q4f32-1-MLC'
         
-        const engine = await CreateMLCEngine(
+        const engine = await CreateWebWorkerMLCEngine(
+            new Worker('/worker.js', {type: 'module'}),
             SELECTED_MODEL,
             {
                 initProgressCallback: (info) => {
