@@ -21,6 +21,19 @@
 
         let messages = [];
 
+        if(window.Worker){
+            const worker = new Worker('./worker.js');
+            worker.postMessage({name: 'Hello'})
+            worker.onmessage = (e) => {
+                console.log('worker: Messaq from main thread');
+                console.log(e)
+                if(e.data.name === 'hello back'){
+                    console.log('Worker: Sending message to main thread');
+                    worker.postMessage({name: 'hello back'});                    
+                }
+            }
+        }; 
+
         const SELECTED_MODEL = 'gemma-2b-it-q4f32-1-MLC'
         
         const engine = await CreateMLCEngine(
